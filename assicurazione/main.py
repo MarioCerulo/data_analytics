@@ -3,7 +3,7 @@ from matplotlib import pyplot as plt
 import seaborn as sns
 from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeClassifier
-from sklearn.naive_bayes import BernoulliNB
+from sklearn.naive_bayes import GaussianNB
 from sklearn.metrics import precision_score, recall_score, accuracy_score, f1_score, confusion_matrix
 
 def main():
@@ -23,7 +23,7 @@ def main():
     for col in cols_with_null:
         df[col] = df[col].fillna(df[col].mean())
 
-    # Keep only valid age range
+    # Keep only valid age range (0 < age < 120)
     df = df[(df["age_in_days"] > 0) | (df["age_in_days"] < 43800)]
 
     # Drop duplicates
@@ -92,7 +92,7 @@ def main():
     print("Accuracy: ", accuracy)
 
     # Naive Bayes
-    nb_model = BernoulliNB()
+    nb_model = GaussianNB()
     nb_model.fit(x_train, y_train)
     y_pred_nb = nb_model.predict(x_test)
 
