@@ -21,8 +21,6 @@ def data_cleaning(df: pd.DataFrame):
         print("Null data found")
         df.dropna(inplace=True)
 
-    df.drop_duplicates()
-
     # Check for invalid negatives
     negative_steps = len(df[df["step"] < 0])
     if negative_steps > 0:
